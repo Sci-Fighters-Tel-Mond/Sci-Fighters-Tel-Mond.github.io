@@ -10,9 +10,13 @@
 
 table {
     border-collapse: collapse;
-    width: 50%;
+    width: 100%;
 }
 
 tr,th,td {
     border: 1px solid black;
+}
+
+iframe {
+    width: 100%;
 }
