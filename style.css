@@ -24,6 +24,7 @@ th {
 
 td {
     background-color: rgb(230, 212, 215);
+    padding-right: 3px;
 }
 
 tr,th,td {
