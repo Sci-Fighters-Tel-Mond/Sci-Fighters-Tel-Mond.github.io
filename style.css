@@ -1,3 +1,7 @@
+body {
+    background-color: cadetblue;
+}
+
 #img {
     position: relative;
     float: none;
@@ -9,12 +13,25 @@
 }
 
 table {
+    /* background-color: khaki; */
     border-collapse: collapse;
     width: 100%;
 }
 
+th {
+    background-color: khaki;
+}
+
+td {
+    background-color: rgb(230, 212, 215);
+}
+
 tr,th,td {
     border: 1px solid black;
+}
+
+td {
+    text-align: right;
 }
 
 iframe {
