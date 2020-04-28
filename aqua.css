@@ -1,0 +1,12 @@
+body {
+    background-color: cadetblue;
+}
+
+th {
+    background-color: khaki;
+    color: black;
+}
+
+td {
+    background-color: rgb(230, 212, 215);
+}
