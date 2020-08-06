@@ -1,0 +1,25 @@
+body {
+    background-color: rgb(132, 140, 109);
+    font-family: Merriweather;
+}
+
+nav ul {
+    margin: 0;
+    padding: 6px;
+}
+
+nav ul li {
+    list-style: none;
+    display: inline;
+    margin-left: 20px;
+}
+
+nav ul :first-child {
+    margin-left: 0;
+}
+
+#logo {
+    width: 75px;
+    position: relative;
+    top: 30px;
+}

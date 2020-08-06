@@ -1,0 +1,15 @@
+#members {
+    /* FLEX WRAP */
+}
+
+.member {
+    display: inline-block;
+}
+
+#baroom img {
+    height: 200px;
+}
+
+#vinkler img {
+    height: 200px;
+}
