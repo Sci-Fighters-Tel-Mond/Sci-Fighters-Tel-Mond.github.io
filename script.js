@@ -1,46 +1,65 @@
 const team_data_element = document.getElementById("team_data");
 
 
-const getAndDisplayTeamData = async() => {
-    while (team_data_element.firstChild) {
-        team_data_element.removeChild(team_data_element.lastChild);
-    }
-
-    console.log("getting");
-    const response = await fetch("https://ftc-scouting-server.herokuapp.com/get_team_data");
-    const data = (await response.json())["data"];
-
-    const lines = data.split("\n");
-    const headerLine = lines[0];
-
-
-    
-
-
-    const headers = headerLine.split(/, |,/);
-    const headers_element = document.createElement("tr");
-    for (const header of headers) {
-        const elt = document.createElement("th");
-        elt.textContent = header;
-        headers_element.appendChild(elt);
-    }
-    team_data_element.appendChild(headers_element);
-
-
-
-    const dataLines = lines.slice(1);
-
-    for (const line of dataLines) {
-        const row = line.split(/, |,/);
-        // console.log("row", row);
-        const row_element = document.createElement("tr");
-        for (const entrie of row) {
-            const elt = document.createElement("td");
-            elt.textContent = entrie;
-            row_element.appendChild(elt);
-        }
-        team_data_element.appendChild(row_element);
-    }
+const firebaseConfig = {
+    apiKey: "AIzaSyDVHiuaLKCWdGeYbUXP91eTk-KdfXcTWoM",
+    authDomain: "ftc-scouting-server.firebaseapp.com",
+    databaseURL: "https://ftc-scouting-server.firebaseio.com",
+    projectId: "ftc-scouting-server",
+    storageBucket: "ftc-scouting-server.appspot.com",
+    messagingSenderId: "663608987721",
+    appId: "1:663608987721:web:7259ed3828ab2a9fcd2f98",
+    measurementId: "G-9H1YQYYKBG"
 };
-getAndDisplayTeamData();
-setInterval(getAndDisplayTeamData, 10000);
+
+firebase.initializeApp(firebaseConfig);
+const firebaseDB = firebase.database();
+const headers = firebaseDB.ref("headers");
+const db = firebaseDB.ref("teams");
+
+let headersData;
+headers.once("value",
+    (data) => {
+        headersData = data.val();
+    },
+    (err) => {
+        if (err) throw err;
+    }
+);
+
+db.on("value",
+    (data) => {
+        // #region clear the Table
+        while (team_data_element.firstChild) {
+            team_data_element.removeChild(team_data_element.lastChild);
+        }
+        // #endregion
+
+        // #region add the headers
+        const headers_row = document.createElement("tr");
+        for (const [key, value] of Object.entries(headersData)) {
+            const th = document.createElement("th");
+            th.innerText = value;
+            headers_row.appendChild(th);
+        }
+        team_data_element.appendChild(headers_row);
+        // #endregion
+
+        // #region add the actual data
+        // for every team entry
+        for (const [id, teamData] of Object.entries(data.val())) {
+            const tr = document.createElement("tr");
+            // for every header
+            for (const [info, _] of Object.entries(headersData)) {
+                const td = document.createElement("td");
+                td.innerText = teamData[info];
+                tr.appendChild(td);
+            }
+            team_data_element.appendChild(tr);
+        }
+        // #endregion
+    },
+    (err) => {
+        if (err) throw err;
+    }
+);
