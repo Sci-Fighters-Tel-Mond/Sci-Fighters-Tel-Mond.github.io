@@ -1,0 +1,48 @@
+@font-face {
+    font-family: Alef;
+    src: url(fonts/Alef-regular.ttf)
+}
+
+@font-face {
+    font-family: "Alef Bold";
+    src: url(fonts/Alef-bold.ttf)
+}
+
+/* @font-face {
+    font-family: AttackOfTheCucumbers;
+    src: url(fonts/AttackOfTheCucumbers.ttf);
+}
+
+@font-face {
+    font-family: PenguinAttack;
+    src: url(fonts/PenguinAttack.ttf);
+}
+
+@font-face {
+    font-family: SharkAttack;
+    src: url(fonts/SharkAttack.ttf);
+} */
+
+/* body.light #fontTesting {
+    color: black;
+}
+
+body.dark #fontTesting {
+    color: white;
+}
+
+#Alef {
+    font-family: Alef;
+}
+
+#AttackOfTheCucumbers {
+    font-family: "AttackOfTheCucumbers";
+}
+
+#PenguinAttack {
+    font-family: "PenguinAttack";
+}
+
+#SharkAttack {
+    font-family: "SharkAttack";
+} */

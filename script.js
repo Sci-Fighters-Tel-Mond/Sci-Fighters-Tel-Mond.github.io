@@ -39,6 +39,7 @@ db.on("value",
         const headers_row = document.createElement("tr");
         for (const [key, value] of Object.entries(headersData)) {
             const th = document.createElement("th");
+            th.classList.add("headers");
             th.innerText = value;
             headers_row.appendChild(th);
         }
@@ -53,6 +54,9 @@ db.on("value",
             for (const [info, _] of Object.entries(headersData)) {
                 const td = document.createElement("td");
                 td.innerText = teamData[info];
+                if (td.innerText == "undefined") {
+                    td.classList.add("undefined");
+                }
                 tr.appendChild(td);
             }
             team_data_element.appendChild(tr);
