@@ -1,0 +1,35 @@
+$team-color: rgb(132, 140, 109);
+
+@font-face {
+    font-family: "Alef";
+    src: url("../fonts/Alef-regular.ttf");
+}
+
+@font-face {
+    font-family: "Alef Bold";
+    src: url("../fonts/Alef-bold.ttf");
+}
+
+.MuiDataGrid-root {
+	font-family: "Alef" !important;
+
+	.MuiDataGrid-columnSeparator {
+		background-color: $team-color; // TODO: hide? colr?
+		// visibility: hidden;
+	}
+
+	.MuiDataGrid-colCell {
+		background-color: $team-color;
+		font-family: "Alef Bold" !important;
+		// width: 500px !important;
+	}
+
+	.Mui-even {
+		background-color: antiquewhite;
+	}
+	
+	.Mui-odd {
+		background-color: aliceblue;
+	}
+
+}
