@@ -53,44 +53,58 @@ const headersData = {
 //         if (err) throw err;
 //     }
 // );
+let sortBy;
 
-db.on("value",
+db.once("value",
     (data) => {
-        // #region clear the Table
-        while (team_data_element.firstChild) {
-            team_data_element.removeChild(team_data_element.lastChild);
-        }
-        // #endregion
-
-        // #region add the headers
-        const headers_row = document.createElement("tr");
-        for (const [key, value] of Object.entries(headersData)) {
-            const th = document.createElement("th");
-            th.classList.add("headers");
-            th.innerText = value;
-            headers_row.appendChild(th);
-        }
-        team_data_element.appendChild(headers_row);
-        // #endregion
-
-        // #region add the actual data
-        // for every team entry
-        for (const [id, teamData] of Object.entries(data.val())) {
-            const tr = document.createElement("tr");
-            // for every header
-            for (const [info, _] of Object.entries(headersData)) {
-                const td = document.createElement("td");
-                td.innerText = teamData[info];
-                if (td.innerText == "undefined") {
-                    td.classList.add("undefined");
-                }
-                tr.appendChild(td);
-            }
-            team_data_element.appendChild(tr);
-        }
-        // #endregion
+        
     },
     (err) => {
         if (err) throw err;
     }
 );
+
+function putIt(data) {
+    // #region clear the Table
+    while (team_data_element.firstChild) {
+        team_data_element.removeChild(team_data_element.lastChild);
+    }
+    // #endregion
+
+    // #region add the headers
+    const headers_row = document.createElement("tr");
+    for (const [key, value] of Object.entries(headersData)) {
+        const th = document.createElement("th");
+        th.classList.add("headers");
+        th.innerText = value;
+
+        th.addEventListener("click", (e) => {
+            console.log("e", e);
+            console.log("target", e.target);
+            console.log("target text content", e.target.textContent);
+            console.log("no \\n", Object.keys(headersData).find((key) => headersData[key].replace(/\n/, "") == e.target.textContent));
+            //console.log("key", Object.keys(headersData).find((key) => headersData[key] == e.target.textContent));
+        });
+        
+        headers_row.appendChild(th);
+    }
+    team_data_element.appendChild(headers_row);
+    // #endregion
+
+    // #region add the actual data
+    // for every team entry
+    for (const teamData of sortedData) {
+        const tr = document.createElement("tr");
+        // for every header
+        for (const [info, _] of Object.entries(headersData)) {
+            const td = document.createElement("td");
+            td.innerText = teamData[info];
+            if (td.innerText == "undefined") {
+                td.classList.add("undefined");
+            }
+            tr.appendChild(td);
+        }
+        team_data_element.appendChild(tr);
+    }
+    // #endregion
+}
